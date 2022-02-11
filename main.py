@@ -48,10 +48,9 @@ def main():
     for event in longpoll.listen():
             if event.type == VkBotEventType.MESSAGE_NEW:
                 if event.from_user:
-                    msg = event.obj.message["text"]
+                    msg = event.obj.message["text"].lower()
                     id = event.obj.message["from_id"]
-                    msg_id = event.obj.message["id"]
-                    
+              
                     with open('raspis.json', 'r', encoding='utf-8') as f:
                         data = json.load(f)
                                           
@@ -59,7 +58,7 @@ def main():
                         update_raspisanie()
                         send_photo(id, "Расписание обновлено")
                     
-                    if "ачать" in msg: 
+                    if "начать" in msg: 
                         vk.method("messages.send", {"peer_id": id, "message": '', "attachment": "photo-209576287_457239928", 'keyboard': kb.keyboard_main.get_keyboard(), "random_id": 0})
                      
             elif event.type == VkBotEventType.MESSAGE_EVENT:
