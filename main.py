@@ -46,7 +46,6 @@ def send_photo_render(photo):
 def main():
     f_toggle: bool = False
     for event in longpoll.listen():
-        try:
             if event.type == VkBotEventType.MESSAGE_NEW:
                 if event.from_user:
                     msg = event.obj.message["text"]
@@ -186,8 +185,7 @@ def main():
                     )
                     f_toggle = not f_toggle
                     
-        except Exception as e:
-            print("Ошибка: {}".format(e))    
+  
        
               
 def update_raspisanie():
@@ -210,10 +208,8 @@ def update_raspisanie():
             doc = fitz.open(pdffile)
             for i in range(0, totalpages):
                 pageobj = pdf.pages[i]
-                group = pageobj.extract_text().split()[:5][2].split('_')[3]
-                numbers.append(group) 
-                 
-                page = doc.loadPage(i)
+                group = pageobj.extract_text().split()[:5][2].replace("_", '')              
+                page = doc.load_page(i)
                 pix = page.get_pixmap()
                 output = f"courses/{course}/{group}"
                 pix.save(f"{output}.png")
