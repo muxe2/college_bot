@@ -1,54 +1,4 @@
-import json
-
 from vk_api.keyboard import VkKeyboard, VkKeyboardColor
-
-
-#Создание кнопок
-def get_but(type = "text", text = None, link = None, color = None, pay = None):
-    if type == "text":
-        return {
-                    "action": {
-                        "type": f"{type}",
-                        "payload": "{\"button\": \"" + "1" + "\"}",
-                        "label": f"{text}",
-                        "link": f"{link}"
-                    },
-                    "color": f"{color}"   
-                }
-    
-    if type == "location":
-        return {
-                    "action": {
-                        "type": f"{type}",
-                        "payload": "{\"button\": \"" + "1" + "\"}",
-                    } 
-                }
-        
-    if type == "vkpay":
-        return {
-                    "action": {
-                        "type": f"{type}",
-                        "payload": "{\"button\": \"" + "1" + "\"}",
-                        "hash": f"{pay}"
-                    } 
-                }
-        
-    if type == "open_link":
-        return {
-                    "action": {
-                        "type": f"{type}",
-                        "payload": "{\"button\": \"" + "1" + "\"}",
-                        "label": f"{text}",
-                        "link": f"{link}"
-                    }
-                }
-        
-#Обработка кнопок
-def dumper(keyboard):
-    keyboard = json.dumps(keyboard, ensure_ascii = False).encode('utf-8')
-    keyboard = str(keyboard.decode('utf-8'))
-    return keyboard
-
 
 # -----------------------------------------------------------
 # Цвета кнопок: 
@@ -56,18 +6,7 @@ def dumper(keyboard):
 # negative - красный
 # secondary - серый
 # primary - синий
-#
-# Виды кнопок:
-# text - обычный текст
-# open_link - гиперссылка 
-#
 # -----------------------------------------------------------
-
-#keyboard_1.add_callback_button(
-#    label="Покажи pop-up сообщение",
-#    color=VkKeyboardColor.SECONDARY,
-#    payload={"type": "show_snackbar", "text": "Это исчезающее сообщение на экране"},
-#)
 
 keyboard_main = VkKeyboard(one_time=False, inline=True)     
 keyboard_main.add_callback_button(
@@ -375,9 +314,47 @@ keyboard_4course.add_callback_button(
     payload={"type": "Отмена_button"},
     )
 
+slov = {'timetable': {'msg': "Расписание",
+                                      'kb': keyboard_course,
+                                      'attch': "photo-209576287_457239929"},
+                        'course_1': {'msg': "1 КУРС",
+                                     'kb': keyboard_1course,
+                                     'attch': None},
+                        'course_2': {'msg': "2 КУРС",
+                                     'kb': keyboard_2course,
+                                     'attch': None},
+                        'course_3': {'msg': "3 КУРС",
+                                     'kb': keyboard_3course,
+                                     'attch': None},
+                        'course_4': {'msg': "4 КУРС",
+                                     'kb': keyboard_4course,
+                                     'attch': None},
+                        "Отмена_button": {'msg': None,
+                                          'kb': keyboard_main,
+                                          'attch': "photo-209576287_457239928"},
+                        'МТ_button':{'msg': "1 КУРС",
+                                     'kb': keyboard_MT,
+                                     'attch': None,
+                                     },
+                        'ИП_button':{'msg': "1 КУРС",
+                                     'kb': keyboard_IP,
+                                     'attch': None,
+                                     },
+                        'МТ_button':{'msg': '1 КУРС',
+                                     'kb': keyboard_MT,
+                                     'attch': None,
+                                     },
+                        'МР_button':{'msg': "3 КУРС",
+                                     'kb': keyboard_MR,
+                                     'attch': None,
+                                     },
+                        'К_button':{'msg': "1 КУРС",
+                                     'kb': keyboard_K,
+                                     'attch': None,
+                                     },
+                        }
 
 def render(course):
-    print(course)
     if course == '1':
         return keyboard_1course.get_keyboard()
         
@@ -388,33 +365,4 @@ def render(course):
         return keyboard_3course.get_keyboard()   
 
     elif course == '4': 
-        return keyboard_4course.get_keyboard()   
-
-
-link = {
-    "one_time" : True,
-    "buttons" : [
-        [get_but('open_link', 'Привет', "https://www.youtube.com/watch?v=_p9RYmIw6mM")]
-    ]
-}
-
-location = {
-    "one_time" : True,
-    "buttons" : [
-        [get_but('location')]
-    ]
-}
-
-bye = {
-    "one_time" : True,
-    "buttons" : [
-        [get_but('пока', 'positive'), get_but('пока', 'negative')],
-        [get_but('пока', 'secondary'), get_but('пока', 'primary')]
-    ]
-}
-
-
-#Переменные для вызова кнопок
-link = dumper(link)
-bye = dumper(bye)
-location = dumper(location)
+        return keyboard_4course.get_keyboard()
