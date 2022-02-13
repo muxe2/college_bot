@@ -1,4 +1,5 @@
 from vk_api.keyboard import VkKeyboard, VkKeyboardColor
+import datetime
 
 # -----------------------------------------------------------
 # Цвета кнопок: 
@@ -7,6 +8,16 @@ from vk_api.keyboard import VkKeyboard, VkKeyboardColor
 # secondary - серый
 # primary - синий
 # -----------------------------------------------------------
+date = datetime.datetime.today()
+
+
+keyboard_main_admin = VkKeyboard(one_time=False, inline=True)     
+keyboard_main_admin.add_callback_button(
+    label="📋 Расписание",
+    color=VkKeyboardColor.PRIMARY,
+    payload={"type": "timetable"},
+)    
+keyboard_main_admin.add_callback_button(label='Обновить', color=VkKeyboardColor.SECONDARY, payload={"type": "show_snackbar", "text": 'Расписание обновиться через 25 секунд'})
 
 keyboard_main = VkKeyboard(one_time=False, inline=True)     
 keyboard_main.add_callback_button(
@@ -14,6 +25,8 @@ keyboard_main.add_callback_button(
     color=VkKeyboardColor.PRIMARY,
     payload={"type": "timetable"},
 )    
+
+#keyboard_main.add_callback_button(label='Покажи pop-up сообщениа', color=VkKeyboardColor.SECONDARY, payload={"type": "show_snackbar", "text": 'f'})
     
 keyboard_course = VkKeyboard(one_time=False, inline=True)
 keyboard_course.add_callback_button(
@@ -314,45 +327,46 @@ keyboard_4course.add_callback_button(
     payload={"type": "Отмена_button"},
     )
 
+
 slov = {'timetable': {'msg': "Расписание",
-                                      'kb': keyboard_course,
-                                      'attch': "photo-209576287_457239929"},
-                        'course_1': {'msg': "1 КУРС",
-                                     'kb': keyboard_1course,
-                                     'attch': None},
-                        'course_2': {'msg': "2 КУРС",
-                                     'kb': keyboard_2course,
-                                     'attch': None},
-                        'course_3': {'msg': "3 КУРС",
-                                     'kb': keyboard_3course,
-                                     'attch': None},
-                        'course_4': {'msg': "4 КУРС",
-                                     'kb': keyboard_4course,
-                                     'attch': None},
-                        "Отмена_button": {'msg': None,
-                                          'kb': keyboard_main,
-                                          'attch': "photo-209576287_457239928"},
-                        'МТ_button':{'msg': "1 КУРС",
-                                     'kb': keyboard_MT,
-                                     'attch': None,
-                                     },
-                        'ИП_button':{'msg': "1 КУРС",
-                                     'kb': keyboard_IP,
-                                     'attch': None,
-                                     },
-                        'МТ_button':{'msg': '1 КУРС',
-                                     'kb': keyboard_MT,
-                                     'attch': None,
-                                     },
-                        'МР_button':{'msg': "3 КУРС",
-                                     'kb': keyboard_MR,
-                                     'attch': None,
-                                     },
-                        'К_button':{'msg': "1 КУРС",
-                                     'kb': keyboard_K,
-                                     'attch': None,
-                                     },
-                        }
+                                        'kb': keyboard_course,
+                                        'attch': "photo-209576287_457239929"},
+                            'course_1': {'msg': "1 КУРС",
+                                        'kb': keyboard_1course,
+                                        'attch': None},
+                            'course_2': {'msg': "2 КУРС",
+                                        'kb': keyboard_2course,
+                                        'attch': None},
+                            'course_3': {'msg': "3 КУРС",
+                                        'kb': keyboard_3course,
+                                        'attch': None},
+                            'course_4': {'msg': "4 КУРС",
+                                        'kb': keyboard_4course,
+                                        'attch': None},
+                            'МТ_button':{'msg': "1 КУРС",
+                                        'kb': keyboard_MT,
+                                        'attch': None,
+                                        },
+                            'ИП_button':{'msg': "1 КУРС",
+                                        'kb': keyboard_IP,
+                                        'attch': None,
+                                        },
+                            'МТ_button':{'msg': '1 КУРС',
+                                        'kb': keyboard_MT,
+                                        'attch': None,
+                                        },
+                            'МР_button':{'msg': "3 КУРС",
+                                        'kb': keyboard_MR,
+                                        'attch': None,
+                                        },
+                            'К_button':{'msg': "1 КУРС",
+                                        'kb': keyboard_K,
+                                        'attch': None,
+                                        },
+                            'timetable_admin':{
+                                
+                            }
+                            }
 
 def render(course):
     if course == '1':

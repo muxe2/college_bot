@@ -33,8 +33,9 @@ def update_raspisanie():
                 pix = page.get_pixmap()
                 output = f"courses/{course}/{group}"
                 pix.save(f"{output}.png")
-                photo = main.send_photo(photo=output, render=True)
+                photo = main.send(photo=output, render=True)
                 settings["list"][group] = photo
                 with open("raspis.json", "wt", encoding="utf-8") as f:
                     json.dump(settings, f, indent=4)
+                    
     print('Расписание обнавлено')
