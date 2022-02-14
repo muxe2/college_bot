@@ -7,12 +7,13 @@ from vk_api.bot_longpoll import VkBotEventType, VkBotLongPoll
 import config
 import kb
 import updater
-
+from datetime import datetime
 
 vk = VkApi(token = config.TOKEN)
 vk_api = vk.get_api()
 CALLBACK_TYPES = ("show_snackbar", "open_link", "open_app")
 longpoll = VkBotLongPoll(vk, group_id=config.GROUP_ID)
+
 
 
 def send(id=None, text=None, photo=None, keyboard=None, render=None):
@@ -67,8 +68,7 @@ def main():
         elif event.type == VkBotEventType.MESSAGE_EVENT:
             event_type = event.object.payload.get("type")
             event_text = event.object.payload.get('text')
-                
-                
+                             
             if event_type in kb.slov:
                 messages_edit(event, f_toggle, kb.slov[event_type]['msg'],
                               kb.slov[event_type]['kb'], kb.slov[event_type]['attch'])
@@ -87,9 +87,13 @@ def main():
                         event_data=json.dumps(event.object.payload),
                     )
                     
-                    if event_text == 'Расписание обновиться через 25 секунд':
+                    if event_text == 'Расписание обновиться через 30 секунд':
                         updater.update_raspisanie()
                         send(id, "Расписание обновлено")
+
+                        
+
+                        
         
                 else:
                     button = event.object.payload.get("type")

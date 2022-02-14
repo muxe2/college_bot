@@ -17,7 +17,8 @@ keyboard_main_admin.add_callback_button(
     color=VkKeyboardColor.PRIMARY,
     payload={"type": "timetable"},
 )    
-keyboard_main_admin.add_callback_button(label='Обновить', color=VkKeyboardColor.SECONDARY, payload={"type": "show_snackbar", "text": 'Расписание обновиться через 25 секунд'})
+keyboard_main_admin.add_line()
+keyboard_main_admin.add_callback_button(label='Обновить', color=VkKeyboardColor.SECONDARY, payload={"type": "show_snackbar", "text": 'Расписание обновиться через 30 секунд'})
 
 keyboard_main = VkKeyboard(one_time=False, inline=True)     
 keyboard_main.add_callback_button(
@@ -327,45 +328,42 @@ keyboard_4course.add_callback_button(
     payload={"type": "Отмена_button"},
     )
 
-
-slov = {'timetable': {'msg': "Расписание",
+group_photo = 'photo-209576287_457239930'
+slov = {'timetable': {'msg': "Выберите курс",
                                         'kb': keyboard_course,
                                         'attch': "photo-209576287_457239929"},
-                            'course_1': {'msg': "1 КУРС",
+                            'course_1': {'msg': "Выберите группу",
                                         'kb': keyboard_1course,
-                                        'attch': None},
-                            'course_2': {'msg': "2 КУРС",
+                                        'attch': group_photo},
+                            'course_2': {'msg': "Выберите группу",
                                         'kb': keyboard_2course,
-                                        'attch': None},
-                            'course_3': {'msg': "3 КУРС",
+                                        'attch': group_photo},
+                            'course_3': {'msg': "Выберите группу",
                                         'kb': keyboard_3course,
-                                        'attch': None},
-                            'course_4': {'msg': "4 КУРС",
+                                        'attch': group_photo},
+                            'course_4': {'msg': "Выберите группу",
                                         'kb': keyboard_4course,
-                                        'attch': None},
-                            'МТ_button':{'msg': "1 КУРС",
+                                        'attch': group_photo},
+                            'МТ_button':{'msg': "Выберите подгруппу | МТ",
                                         'kb': keyboard_MT,
-                                        'attch': None,
+                                        'attch': group_photo,
                                         },
-                            'ИП_button':{'msg': "1 КУРС",
+                            'ИП_button':{'msg': "Выберите подгруппу | ИП",
                                         'kb': keyboard_IP,
-                                        'attch': None,
+                                        'attch': group_photo,
                                         },
-                            'МТ_button':{'msg': '1 КУРС',
+                            'МТ_button':{'msg': "Выберите подгруппу | МТ",
                                         'kb': keyboard_MT,
-                                        'attch': None,
+                                        'attch': group_photo,
                                         },
-                            'МР_button':{'msg': "3 КУРС",
+                            'МР_button':{'msg': "Выберите подгруппу | МР",
                                         'kb': keyboard_MR,
-                                        'attch': None,
+                                        'attch': group_photo,
                                         },
-                            'К_button':{'msg': "1 КУРС",
+                            'К_button':{'msg': "Выберите подгруппу | К",
                                         'kb': keyboard_K,
-                                        'attch': None,
+                                        'attch': group_photo,
                                         },
-                            'timetable_admin':{
-                                
-                            }
                             }
 
 def render(course):
