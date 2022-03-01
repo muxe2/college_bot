@@ -1,5 +1,5 @@
 from vk_api.keyboard import VkKeyboard, VkKeyboardColor
-import datetime
+
 
 # -----------------------------------------------------------
 # Цвета кнопок: 
@@ -8,7 +8,6 @@ import datetime
 # secondary - серый
 # primary - синий
 # -----------------------------------------------------------
-date = datetime.datetime.today()
 
 
 keyboard_main_admin = VkKeyboard(one_time=False, inline=True)     
@@ -18,7 +17,12 @@ keyboard_main_admin.add_callback_button(
     payload={"type": "timetable"},
 )    
 keyboard_main_admin.add_line()
-keyboard_main_admin.add_callback_button(label='Обновить', color=VkKeyboardColor.SECONDARY, payload={"type": "show_snackbar", "text": 'Расписание обновиться через 30 секунд'})
+keyboard_main_admin.add_callback_button(label='Обновить',
+                                        color=VkKeyboardColor.SECONDARY,
+                                        payload={"type": "show_snackbar",
+                                                 "text": 'Расписание обновиться через 30 секунд'
+                                                 }
+                                        )
 
 keyboard_main = VkKeyboard(one_time=False, inline=True)     
 keyboard_main.add_callback_button(
