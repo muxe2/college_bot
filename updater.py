@@ -28,7 +28,9 @@ def update_raspisanie():
             for i in range(0, totalpages):
                 pageobj = pdf.pages[i]
                 group = pageobj.extract_text().split()[:5][2].replace("_", '')
+                
                 print(f'Обработка {group}' + '\r', end='')
+                
                 page = doc.load_page(i)
                 pix = page.get_pixmap()
                 output = f"courses/{course}/{group}"
